@@ -4,7 +4,7 @@ const mysql = new MySql(sqlConnectionParam);
 const connection = mysql.connection;
 
 burgers = {
-  status: function(devourBool){mysql
+  select: function(devourBool){mysql
     .selectAll(devourBool)
     .then(dataset => {
       console.log(dataset);

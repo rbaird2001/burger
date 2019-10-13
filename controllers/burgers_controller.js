@@ -1,14 +1,15 @@
 const express = require("express");
+//var exphbs = require("express-handlebars");
 const app = express()
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
-app.set("view engine", "handlebars");
+//app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+//app.set("view engine", "handlebars");
 const burgers = require("../models/burger");
 
 //console.log(burgers.status(1)) //TODO test your import of burger functions
 
 app.get("api/allBurgers",function(req,res){
-    let devoured = burgers.status(1)
-    let undevoured = burgers.status(0)
+    let dataset = burgers.select();
+    return res.render("index",{burgers: dataset})
 });
 
 app.post("api/devour",function(req,res){
