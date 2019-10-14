@@ -36,7 +36,7 @@ module.exports = (app) => {
     app.get("/",function(req,res){
         burgers.select()
         .then(function(dataset){
-            res.json(dataset);
+            res.redirect("/api/allBurgers");
         })
     })
 }    
