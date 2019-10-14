@@ -19,7 +19,7 @@ module.exports = (app) => {
         burgers.devour(req.body.burger_name)
         .then(function(resp){
             console.log(resp);
-            res.redirect("/api/allBurgers");
+            res.send(resp);
         })
         .catch(function(err){console.log(err)});
     })
@@ -28,7 +28,7 @@ module.exports = (app) => {
         console.log(req.body);
         burgers.add(req.body.burger_name,0)
         .then(function(resp){
-            res.redirect("/api/allBurgers")
+            res.send(resp)
         })
         .catch(function(err){console.log(err)});
     });

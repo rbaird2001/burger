@@ -1,0 +1,15 @@
+
+button {
+    width: 90%;
+    border-radius: 8px;
+}
+
+#headImage{
+    height: 150px;
+    width: 200px;
+}
+
+#submit{
+    margin-left: auto;
+    margin-right: auto;
+}

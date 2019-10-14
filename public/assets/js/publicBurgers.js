@@ -16,6 +16,7 @@ getSubmit.addEventListener("click", function(event) {
       data: submitNewBurger
     }).then(function(resp) {
       // reload the page to display new burger
+      console.log(resp);
       location.reload();
     });
   }
@@ -28,12 +29,16 @@ devourBurger.forEach(function(element){
         let submitDevour = {burger_name: element.innerHTML};
         console.log(submitDevour);
 
-    $.ajax("/api/devour", {
-        type: "PUT",
-        data: submitDevour
-    }).then(function(){
-        console.log("response")
-        location.reload();
-    });
-    });
+        $.ajax("/api/devour", {
+            type: "PUT",
+            data: submitDevour
+        })
+        .then(function(resp){
+          console.log(resp)
+          location.reload()
+        })
+        .catch(function(err){
+          console.log(err)
+        });
+    })
 });
