@@ -30,11 +30,11 @@ MySql.prototype.selectAll = function(devour) {
   });
 };
 
-MySql.prototype.selectOne = function(burgerID) {
+MySql.prototype.selectOne = function(burgerName) {
   return new Promise((resolve, reject) => {
     this.connection.query(
-      "SELECT * FROM burgers WHERE id = ?",
-      burgerID,
+      "SELECT id FROM burgers WHERE burger_name = ?",
+      burgerName,
       (err, dataset) => {
         if (err) {
           reject(err);
@@ -51,6 +51,7 @@ MySql.prototype.selectOne = function(burgerID) {
 
 MySql.prototype.insertOne = function(burgerName, devour) {
   return new Promise((resolve, reject) => {
+    console.log(burgerName);
     this.connection.query(
       "SELECT COUNT(id) as burgerCount from burgers WHERE burger_name = ?",
       burgerName,
@@ -69,29 +70,28 @@ MySql.prototype.insertOne = function(burgerName, devour) {
               }
             }
           );
-        } else {
-          if (dataset[0].burgerCount > 0) {
+        } else if (!err && dataset[0].burgerCount > 0) { 
             reject("That burger already exists");
           } else {
             reject(err);
           }
-        }
       }
     );
   });
 };
 
-MySql.prototype.devourOne = function(burgerID) {
+MySql.prototype.devourOne = function(burgerName) {
   return new Promise((resolve, reject) => {
-    let devour = [{ devoured: 1 }, { id: burgerID }];
+    let devour = [{ devoured: 1 }, { burger_name: burgerName }];
     this.connection.query(
       "UPDATE burgers SET ? WHERE ?",
       devour,
       (err, resp) => {
         if (err) {
+          console.log("reject")
           reject(err);
         } else {
-          //console.log("response = "+resp.changedRows);
+          console.log("response = "+resp.changedRows);
           resolve(resp.changedRows);
         }
       }

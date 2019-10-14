@@ -1,24 +1,61 @@
-const express = require("express");
+//const express = require("express");
 //var exphbs = require("express-handlebars");
-const app = express()
+//const app = express()
 //app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 //app.set("view engine", "handlebars");
 const burgers = require("../models/burger");
 
 //console.log(burgers.status(1)) //TODO test your import of burger functions
+module.exports = (app) => {
+    app.get("/api/allburgers",function(req,res){
+        burgers.select()
+        .then(function(dataset){
+        res.render("index",{burgers: dataset})
+        });
+    });
+    
+    app.put("/api/devour",function(req,res){
+        console.log(req.body);
+        burgers.devour(req.body.burger_name)
+        .then(function(resp){
+            console.log(resp);
+            res.redirect("/api/allBurgers");
+        })
+        .catch(function(err){console.log(err)});
+    })
 
-app.get("api/allBurgers",function(req,res){
-    let dataset = burgers.select();
-    return res.render("index",{burgers: dataset})
-});
+    app.post("/api/newBurger",function(req,res){
+        console.log(req.body);
+        burgers.add(req.body.burger_name,0)
+        .then(function(resp){
+            res.redirect("/api/allBurgers")
+        })
+        .catch(function(err){console.log(err)});
+    });
+    
+    app.get("/",function(req,res){
+        burgers.select()
+        .then(function(dataset){
+            res.json(dataset);
+        })
+    })
+}    
 
-app.post("api/devour",function(req,res){
-    burgers.devour(req.body.burgerID);
-    res.redirect("api/allBurgers");
-});
+//module.exports = app
 
-app.post("api/newBurger",function(req,res){
-    burgers.add(req.body.burgerName)
-    res.redirect("api/allBurgers")
-});
+//const PORT = process.env.PORT || 8080;
 
+//app.use(express.urlencoded({ extended: true }));
+//app.use(express.json());
+
+//app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+//app.set("view engine", "handlebars");
+
+//routes = require("./controllers/burgers_controller");
+//app.use(routes);
+
+// app.use(express.static("public"));
+
+// app.listen(PORT, function() {
+// 	console.log("This app is listening on PORT: " + PORT + ".");
+// });
