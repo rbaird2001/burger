@@ -1,6 +1,6 @@
 const MySql = require("../config/orm");
-const sqlConnectionParam = require("../config/connectionParam")
-const mysql = new MySql(sqlConnectionParam);
+//const sqlConnectionParam = require("../config/connectionParam")
+const mysql = new MySql(process.env.JAWSDB_MARIA_URL);
 //const connection = mysql.connection;
 
 burgers = {

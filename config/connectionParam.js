@@ -1,4 +1,4 @@
-module.exports = (process.env.JAWSDB_MARIA)
+module.exports = (process.env.JAWSDB_MARIA_URL)
 
 
 //{
