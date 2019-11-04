@@ -37,6 +37,9 @@ If not installed you will need to install NodeJS server and the npm packages. Af
 
 ## Acknowledgments
 Richard Baird
+
 Matt Banz
+
 Katie Sexton
+
 Andi Carlstrom
