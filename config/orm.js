@@ -1,6 +1,6 @@
 const mysql=require("mysql");
 const MySql = function(connectionParam){
-  this.connection=mysql.createConnection(connectionParam)
+  this.connection=mysql.createConnection(process.env.JAWSDB_MARIA_URL)
 };
 
 //const MySql = require("./connection.js");
