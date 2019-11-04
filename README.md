@@ -10,7 +10,7 @@ This project creates a list of burgers and includes the ability to add burgers. 
 
 ## Instructions
 
-### Database:
+### Database
 #### Database Server and Connectivity
 After you have cloned the repository, you will need to determine which database server to use and where it will be installed. This application has been tested using MySql Server installed locally, MariaDB Server insalled on an AWS RDS Server, and Heroku with Jaws MariaDB add-on. After making determinations regarding establishing your database. You will need to set it up and establish credentials. The connectionParam.js file contains a commented example of how this may look. Use only as an example, the parameters contain therein are not valid. A pdf file explaining how to set this up via Heroku is found at the root of this repository. 
 
